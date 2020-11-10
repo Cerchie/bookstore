@@ -1,5 +1,5 @@
 /** Integration tests for books route */
-
+//typo in solution -- async in describe
 
 process.env.NODE_ENV = "test"
 
@@ -32,7 +32,7 @@ beforeEach(async () => {
 });
 
 
-describe("POST /books", async function () {
+describe("POST /books",function () {
   test("Creates a new book", async function () {
     const response = await request(app)
         .post(`/books`)
@@ -46,8 +46,10 @@ describe("POST /books", async function () {
           title: "amazing times",
           year: 2000
         });
+        
     expect(response.statusCode).toBe(201);
     expect(response.body.book).toHaveProperty("isbn");
+  
   });
 
   test("Prevents creating book without required title", async function () {
@@ -59,7 +61,7 @@ describe("POST /books", async function () {
 });
 
 
-describe("GET /books", async function () {
+describe("GET /books", function () {
   test("Gets a list of 1 book", async function () {
     const response = await request(app).get(`/books`);
     const books = response.body.books;
@@ -70,7 +72,7 @@ describe("GET /books", async function () {
 });
 
 
-describe("GET /books/:isbn", async function () {
+describe("GET /books/:isbn",  function () {
   test("Gets a single book", async function () {
     const response = await request(app)
         .get(`/books/${book_isbn}`)
@@ -86,7 +88,7 @@ describe("GET /books/:isbn", async function () {
 });
 
 
-describe("PUT /books/:id", async function () {
+describe("PUT /books/:id", function () {
   test("Updates a single book", async function () {
     const response = await request(app)
         .put(`/books/${book_isbn}`)
@@ -130,7 +132,7 @@ describe("PUT /books/:id", async function () {
 });
 
 
-describe("DELETE /books/:id", async function () {
+describe("DELETE /books/:id", function () {
   test("Deletes a single a book", async function () {
     const response = await request(app)
         .delete(`/books/${book_isbn}`)
